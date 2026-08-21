@@ -16,7 +16,7 @@ object DatabaseFactory {
             driver = "org.sqlite.JDBC",
         )
         transaction {
-            SchemaUtils.create(OperacionesTable)
+            SchemaUtils.createMissingTablesAndColumns(OperacionesTable)
         }
         seedIfEmpty()
     }
