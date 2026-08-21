@@ -11,4 +11,5 @@ data class OperacionDto(
     val tipo: String? = null,
     val autor: String? = null,
     val fechaCreacion: Long,
+    val guardada: Boolean = false,
 )

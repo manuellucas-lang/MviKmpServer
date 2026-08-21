@@ -39,6 +39,20 @@ fun Route.operacionesRoutes(service: OperacionesService) {
             call.respond(HttpStatusCode.Created, created)
         }
 
+        post("/{id}/purchase") {
+            val id = call.parameters["id"]?.toLongOrNull()
+            if (id == null) {
+                call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Invalid id"))
+                return@post
+            }
+            val purchased = service.purchase(id)
+            if (purchased == null) {
+                call.respond(HttpStatusCode.NotFound, mapOf("error" to "Operacion not found"))
+            } else {
+                call.respond(purchased)
+            }
+        }
+
         put("/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id == null) {

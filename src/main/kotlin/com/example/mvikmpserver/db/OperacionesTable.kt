@@ -10,6 +10,7 @@ object OperacionesTable : Table("operaciones") {
     val tipo = text("tipo").nullable()
     val autor = text("autor").nullable()
     val fechaCreacion = long("fecha_creacion")
+    val guardada = bool("guardada").default(false)
 
     override val primaryKey = PrimaryKey(id)
 }

@@ -49,6 +49,13 @@ class OperacionesService {
         if (updated == 0) null else findById(id)
     }
 
+    fun purchase(id: Long): OperacionDto? = transaction {
+        val updated = OperacionesTable.update({ OperacionesTable.id eq id }) {
+            it[guardada] = true
+        }
+        if (updated == 0) null else findById(id)
+    }
+
     fun delete(id: Long): Boolean = transaction {
         OperacionesTable.deleteWhere { OperacionesTable.id eq id } > 0
     }
@@ -69,5 +76,6 @@ class OperacionesService {
             tipo = row[OperacionesTable.tipo],
             autor = row[OperacionesTable.autor],
             fechaCreacion = row[OperacionesTable.fechaCreacion],
+            guardada = row[OperacionesTable.guardada],
         )
 }
